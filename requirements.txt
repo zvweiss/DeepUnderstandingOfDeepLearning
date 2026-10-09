@@ -1,0 +1,24 @@
+# Notebook and debugging support
+ipykernel==7.4.0
+jupyter==1.1.1
+debugpy==1.8.22
+ruff==0.16.9
+poethepoet==0.48.0
+
+# Scientific Python and visualization
+numpy==2.5.3
+scipy==1.18.1
+pandas==3.0.6
+sympy==1.14.0
+matplotlib==3.11.2
+seaborn==0.13.2
+scikit-learn==1.9.1
+scikit-image==0.26.0
+pillow==12.3.0
+imageio==2.38.1
+requests==2.34.2
+
+# Deep learning
+torch==2.14.1
+torchvision==0.29.1
+torchsummary==1.5.1

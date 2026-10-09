@@ -1,0 +1,15 @@
+[tool.poe.tasks.export]
+cmd = "python tools/notebook_to_python.py ${notebook} ${force:+--force}"
+help = "Export a Jupyter notebook to a cleaned, formatted Python file"
+
+[[tool.poe.tasks.export.args]]
+name = "notebook"
+help = "Path to the .ipynb file"
+positional = true
+required = true
+
+[[tool.poe.tasks.export.args]]
+name = "force"
+help = "Overwrite the destination .py file if it already exists"
+options = ["--force"]
+type = "boolean"
