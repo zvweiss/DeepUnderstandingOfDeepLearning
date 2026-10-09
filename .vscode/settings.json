@@ -8,5 +8,15 @@
     "files.exclude": {
         "**/__pycache__": true,
         "**/.ipynb_checkpoints": true
-    }
+    },
+    "cSpell.words": [
+        "deeplearning",
+        "maxidx",
+        "maxval",
+        "minidx",
+        "minval",
+        "minvals",
+        "sincxpress",
+        "udemy"
+    ]
 }
