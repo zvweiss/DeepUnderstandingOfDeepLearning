@@ -10,6 +10,7 @@
         "**/.ipynb_checkpoints": true
     },
     "cSpell.words": [
+        "corrcoef",
         "deeplearning",
         "maxidx",
         "maxval",
@@ -20,8 +21,13 @@
         "pycache",
         "pytest",
         "sincxpress",
+        "softfun",
+        "Softmaxified",
         "udemy",
-        "venv"
+        "venv",
+        "xlabel",
+        "ylabel",
+        "yscale"
     ],
     "python-envs.defaultEnvManager": "ms-python.python:system"
 }
