@@ -16,7 +16,12 @@
         "minidx",
         "minval",
         "minvals",
+        "mypy",
+        "pycache",
+        "pytest",
         "sincxpress",
-        "udemy"
-    ]
+        "udemy",
+        "venv"
+    ],
+    "python-envs.defaultEnvManager": "ms-python.python:system"
 }
