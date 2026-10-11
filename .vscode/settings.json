@@ -1,6 +1,7 @@
 {
     "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
     "python.terminal.activateEnvironment": true,
+    "python-envs.terminal.autoActivationType": "command",
     "python.analysis.extraPaths": [
         "${workspaceFolder}"
     ],
@@ -10,9 +11,13 @@
         "**/.ipynb_checkpoints": true
     },
     "cSpell.words": [
+        "backprop",
         "corrcoef",
         "deeplearning",
         "deepnet",
+        "epochi",
+        "lossfun",
+        "markerfacecolor",
         "maxidx",
         "maxval",
         "minidx",
@@ -20,11 +25,14 @@
         "minvals",
         "mypy",
         "nparams",
+        "numepochs",
         "pycache",
         "pytest",
+        "randn",
         "sincxpress",
         "softfun",
         "Softmaxified",
+        "testloss",
         "torchinfo",
         "torchsummary",
         "udemy",
@@ -34,5 +42,5 @@
         "ylabel",
         "yscale"
     ],
-    "python-envs.defaultEnvManager": "ms-python.python:system"
+    "python-envs.defaultEnvManager": "ms-python.python:venv"
 }

@@ -1,5 +1,5 @@
 # This file was generated from a Jupyter notebook.
-# ruff: noqa: B018
+# ruff: noqa: B018, I001
 
 # |<h2>Course:</h2>|<h1><a href="https://udemy.com/course/deeplearning_x/?couponCode=202508" target="_blank">A deep understanding of deep learning</a></h1>|
 # |-|:-:|
@@ -15,10 +15,7 @@
 # %%
 # import all necessary modules
 import matplotlib.pyplot as plt
-import matplotlib_inline.backend_inline
 import numpy as np
-
-matplotlib_inline.backend_inline.set_matplotlib_formats("svg")
 
 
 # # Gradient descent in 1D

@@ -1,4 +1,5 @@
 # This file was generated from a Jupyter notebook.
+# ruff: noqa: I001
 
 # |<h2>Course:</h2>|<h1><a href="https://udemy.com/course/deeplearning_x/?couponCode=202508" target="_blank">A deep understanding of deep learning</a></h1>|
 # |-|:-:|
@@ -14,12 +15,9 @@
 # %%
 # import libraries
 import matplotlib.pyplot as plt
-import matplotlib_inline.backend_inline
 import numpy as np
 import torch
 from torch import nn
-
-matplotlib_inline.backend_inline.set_matplotlib_formats("svg")
 
 
 # # A function that creates and trains the model

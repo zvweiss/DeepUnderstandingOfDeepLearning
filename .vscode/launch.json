@@ -8,6 +8,7 @@
             "program": "${file}",
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
+            "guiEventLoop": "none",
             "justMyCode": true
         },
         {
@@ -17,6 +18,7 @@
             "program": "${file}",
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
+            "guiEventLoop": "none",
             "justMyCode": false
         }
     ]

@@ -1,5 +1,5 @@
 # This file was generated from a Jupyter notebook.
-# ruff: noqa: B018
+# ruff: noqa: B018, I001
 
 # |<h2>Course:</h2>|<h1><a href="https://udemy.com/course/deeplearning_x/?couponCode=202508" target="_blank">A deep understanding of deep learning</a></h1>|
 # |-|:-:|
@@ -15,13 +15,10 @@
 # %%
 # import libraries
 import matplotlib.pyplot as plt
-import matplotlib_inline.backend_inline
 import numpy as np
 import torch
 import torch.nn.functional as F
 from torch import nn
-
-matplotlib_inline.backend_inline.set_matplotlib_formats("svg")
 
 
 # # Import and organize the data

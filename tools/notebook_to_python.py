@@ -11,7 +11,23 @@ from pathlib import Path
 from nbconvert import PythonExporter
 
 GENERATED_PREAMBLE = "# This file was generated from a Jupyter notebook.\n"
-RUFF_NOTEBOOK_EXCEPTION = "# ruff: noqa: B018\n"
+RUFF_NOTEBOOK_EXCEPTION = "# ruff: noqa: B018, I001\n"
+NOTEBOOK_DISPLAY_SETUP = re.compile(
+    r"^\s*(?:%matplotlib\s+inline|get_ipython\(\)\.run_line_magic\("
+    r"[\"']matplotlib[\"'],\s*[\"']inline[\"']\)|"
+    r"import\s+matplotlib_inline\.backend_inline|"
+    r"matplotlib_inline\.backend_inline\.set_matplotlib_formats\([^)]*\))\s*$"
+)
+NOTEBOOK_ONLY_CODE = (
+    (re.compile(r"\bgoogle\.colab\b"), "Google Colab import"),
+    (re.compile(r"\bfiles\.upload\s*\("), "Google Colab file upload"),
+    (re.compile(r"\bdrive\.mount\s*\("), "Google Drive mount"),
+    (re.compile(r"\bget_ipython\s*\("), "IPython command"),
+)
+
+
+class NotebookOnlyCodeError(ValueError):
+    """Raised when an export needs a user-selected local replacement."""
 
 
 def parse_args() -> argparse.Namespace:
@@ -43,6 +59,28 @@ def clean_export(source: str) -> str:
         or not lines[0].strip()
     ):
         lines.pop(0)
+
+    # Matplotlib displays figures without this Jupyter-only directive in a normal
+    # Python process (with plt.show()) or in VS Code's interactive window.
+    lines = [line for line in lines if NOTEBOOK_DISPLAY_SETUP.fullmatch(line) is None]
+
+    unsupported: list[str] = []
+    for line_number, line in enumerate(lines, start=1):
+        if line.lstrip().startswith("#"):
+            continue
+        for pattern, description in NOTEBOOK_ONLY_CODE:
+            if pattern.search(line):
+                unsupported.append(f"line {line_number}: {description}: {line.strip()}")
+                break
+
+    if unsupported:
+        details = "\n".join(f"  - {item}" for item in unsupported)
+        raise NotebookOnlyCodeError(
+            "Cannot create a standalone .py file until this notebook-only code "
+            f"is replaced:\n{details}\n"
+            "Use a local file path (pathlib.Path or a file-picker library) in place "
+            "of Colab upload/mount helpers."
+        )
 
     cleaned = "\n".join(lines)
     cleaned = re.sub(r"^# In\[[^]]*\]:\s*$", "# %%", cleaned, flags=re.MULTILINE)
@@ -79,12 +117,19 @@ def main() -> int:
     if not notebook.is_file():
         raise SystemExit(f"Notebook not found: {notebook}")
     if output.exists() and not args.force:
-        raise SystemExit(f"Output already exists: {output}\nUse --force to overwrite it.")
+        raise SystemExit(
+            f"Output already exists: {output}\nUse --force to overwrite it."
+        )
 
     exporter = PythonExporter()
     source, _ = exporter.from_filename(str(notebook))
+    try:
+        source = clean_export(source)
+    except NotebookOnlyCodeError as error:
+        raise SystemExit(f"Could not export {notebook}:\n{error}") from error
+
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(clean_export(source), encoding="utf-8")
+    output.write_text(source, encoding="utf-8")
     run_ruff(output)
 
     print(f"Created {output}")

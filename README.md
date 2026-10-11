@@ -66,8 +66,10 @@ VS Code also supports Python cell markers. Add `# %%` before a section of a
 `.py` file to run that section interactively while keeping the file directly
 executable and debuggable.
 
-Notebook-only commands such as `%matplotlib inline` and Google Colab helpers
-must be removed or replaced when notebook cells are moved into `.py` files.
+The exporter removes `%matplotlib inline` because it is unnecessary in a
+standalone script. If a notebook uses Google Colab upload or Drive-mount
+helpers, exporting stops with an error that identifies the affected lines;
+replace those helpers with local file paths before exporting.
 
 To rebuild the environment:
 
